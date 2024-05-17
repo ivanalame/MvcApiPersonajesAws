@@ -69,5 +69,32 @@ namespace MvcApiPersonajesAws.Services
             }
           
         }
+
+        public async Task UpdatePersonajesAsync(int id,string nombre, string imagen)
+        {
+            using (HttpClientHandler handler = new HttpClientHandler())
+            {
+                handler.ServerCertificateCustomValidationCallback = (messasge, cert, chain, sslPolicies) =>
+                {
+                    return true;
+                };
+                using (HttpClient client = new HttpClient(handler))
+                {
+                    string request = "api/Personajes";
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(this.header);
+                    Personaje personaje = new Personaje
+                    {
+                        IdPersonaje = id,
+                        Nombre = nombre,
+                        Imagen = imagen
+                    };
+                    string json = JsonConvert.SerializeObject(personaje);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PutAsync(this.UrlApi + request, content);
+                }
+            }
+
+        }
     }
 }

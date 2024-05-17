@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create" asp-controller="Personajes">Create New</a>
+    <a asp-action="CreatePersonajes" asp-controller="Personajes">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -37,9 +37,7 @@
                <img src="@item.Imagen" class="w-25 y-25"/>
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+               <a asp-action="Edit" asp-controller="Personajes" >Edit</a>
             </td>
         </tr>
 }
